@@ -1,0 +1,18 @@
+
+ 1. Initializes cluster master node:
+
+ kubeadm init --apiserver-advertise-address $(hostname -i)
+
+
+ 2. Initialize cluster networking:
+
+ kubectl apply -n kube-system -f \
+    "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 |tr -d '\n')"
+
+
+ 3. (Optional) Create an nginx deployment:
+
+ kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
+
+kubeadm join 192.168.0.33:6443 --token 66pfq9.bvqn7ewtswhr6ig5 \
+    --discovery-token-ca-cert-hash sha256:3841f6d43f0e96bedd30267cd5345a7b24b9bcfcca05375dbff3f826d0e351fc
